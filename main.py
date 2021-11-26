@@ -41,10 +41,7 @@ def get_link_info(url, num):
     #     link = entrie["link"]
     #     result = result + "\n" + "[" + title + "](" + link + ")" + "\n"
 
-    session = HTMLSession()
-    response = session.get(url)  # 单位秒数
-
-    content = response.html.find('a.title', first=True)
+    content =  HTMLSession().get(url).html.find('a.title', first=True)
     for a in content:
         title = entrie["title"]
         link = entrie["link"]
