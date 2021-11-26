@@ -1,4 +1,5 @@
 import requests
+from lxml import etree
 import time
 import os
 import re
@@ -11,7 +12,7 @@ def get_link_info(url, num):
     page = requests.get(url, headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
     })
-    tree = page.HTML(page.text)
+    tree = etree.HTML(page.text)
 
     content = tree.xpath('//*[@id="juejin"]/div[1]/main/div[3]/div[1]/div[2]/div/div[2]/div/div[2]/li/div/div[2]/div/div[1]/a')
     # content = tree.xpath('//html/body/div[1]/div/div/div[1]/main/div[3]/div[1]/div[2]/div/div[2]/div/div[2]/li[1]/div/div[2]/div/div[1]/a')
