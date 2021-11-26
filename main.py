@@ -31,6 +31,7 @@ def get_link_info(url, num):
 
     # feed
     feed = feedparser.parse(url)
+    print(feed.text)
     feed_entries = feed["entries"]
     
     for entrie in feed_entries[0: 3]:
