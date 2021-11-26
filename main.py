@@ -1,7 +1,9 @@
 # import requests
 # from lxml import etree
 # from bs4 import BeautifulSoup
-import feedparser
+from requests_html import HTMLSession
+import requests
+# import feedparser
 import time
 import os
 import re
@@ -30,11 +32,20 @@ def get_link_info(url, num):
     #       result = result + '\n' + '[' + title + '](' + link + ')' + '\n'
 
     # feed
-    feed = feedparser.parse(url)
-    print(feed["entries"])
-    feed_entries = feed["entries"]
+    # feed = feedparser.parse(url)
+    # print(feed["entries"])
+    # feed_entries = feed["entries"]
     
-    for entrie in feed_entries[0: 3]:
+    # for entrie in feed_entries[0: 3]:
+    #     title = entrie["title"]
+    #     link = entrie["link"]
+    #     result = result + "\n" + "[" + title + "](" + link + ")" + "\n"
+
+    session = HTMLSession()
+    response = session.get(url)  # 单位秒数
+
+    content = response.html.find('a.title', first=True)
+    for a in content:
         title = entrie["title"]
         link = entrie["link"]
         result = result + "\n" + "[" + title + "](" + link + ")" + "\n"
