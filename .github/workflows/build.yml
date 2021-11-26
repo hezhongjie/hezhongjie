@@ -25,6 +25,7 @@ jobs:
         run: |
           git diff
           git config user.name 'hezhongjie'
+          git config user.password 'hezhongjie1993'
           git config user.email 'hezhongjie132@163.com'
           git add README.md
           git commit -m "Github Action Auto Updated"
