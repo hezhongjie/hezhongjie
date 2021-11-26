@@ -44,7 +44,6 @@ def get_link_info(url, num):
 
 def main():
 
-
     
     v2fy_info =  get_link_info("https://juejin.cn/user/2348212570037421/posts", 3)
     print(v2fy_info)
