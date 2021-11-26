@@ -23,10 +23,11 @@ def get_link_info(url, num):
     #     link = each['link']
     #     result = result + '\n' + '[' + title + '](' + link + ')' + '\n'
     soup = BeautifulSoup(page.text, 'html.parser')
-    for each in soup.find_all(attrs={'class':'title',tagName:'A'})
+    for each in soup.find_all(attrs={'class':'title',tagName:'A'}):
           title = each['title']
           link = each['link']
           result = result + '\n' + '[' + title + '](' + link + ')' + '\n'
+          
     return result
 
 
