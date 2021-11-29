@@ -13,7 +13,7 @@ async function getData(url, num = 3) {
     // console.log(data.data);
     data = data.data;
 
-    let newStr = formatData(data).join('\n');
+    let newStr = formatData(data).join('\n\n\n');
     let oldStr = fs.readFileSync('README.md').toString();
     // console.log(newStr); 
 
@@ -29,7 +29,7 @@ async function getData(url, num = 3) {
 
     newStr = '\n\n(更新时间:' + new Date().toString() + ' | 本部分通过Github Actions抓取RSS自动更新, 无意中实现了自动刷绿墙...)\n\n' + newStr;
 
-    fs.writeFileSync('README.md', '---start---' + newStr + '\n---end---');
+    fs.writeFileSync('README.md', '---start---' + newStr + '\n\n---end---');
 }
 function formatData(str) {
     const root = parser.parse(str);
