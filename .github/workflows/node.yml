@@ -2,9 +2,8 @@ on:
   schedule:
     - cron: '0/10 * * * *'
 
-
 jobs:
-  更新README文件:
+  update:
     runs-on: ubuntu-latest
 
     steps:
