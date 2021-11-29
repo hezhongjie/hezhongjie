@@ -1,0 +1,23 @@
+{
+  "name": "hezhongjie",
+  "version": "1.0.0",
+  "description": "---start---",
+  "main": "schedule-readme.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hezhongjie/hezhongjie.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hezhongjie/hezhongjie/issues"
+  },
+  "homepage": "https://github.com/hezhongjie/hezhongjie#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "node-html-parser": "^5.1.0"
+  }
+}
