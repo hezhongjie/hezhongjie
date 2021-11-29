@@ -27,7 +27,9 @@ jobs:
         run: npm install  
 
       - name: node run file
-        run: node schedule-readme.js
+        run: |
+        ls
+        node schedule-readme.js
 
       - name: commit and push
         run: |
