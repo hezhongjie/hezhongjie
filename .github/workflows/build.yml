@@ -1,6 +1,6 @@
 on:
-  # push:
-    # branches: [ main ]
+  push:
+    branches: [ test ]
   # schedule:
   #   - cron: '0/10 * * * *'
 
