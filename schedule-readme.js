@@ -25,9 +25,9 @@ async function getData(url, num = 3) {
     // console.log(oldData);
     oldData.shift();
 
-    if (oldData.join('\n') === newStr) return;
+    if (oldData.join('\n\n') === newStr) return;
 
-    newStr = '\n(更新时间:' + new Date().toString() + ' | 本部分通过Github Actions抓取RSS自动更新, 无意中实现了自动刷绿墙...)\n' + newStr;
+    newStr = '\n\n(更新时间:' + new Date().toString() + ' | 本部分通过Github Actions抓取RSS自动更新, 无意中实现了自动刷绿墙...)\n\n' + newStr;
 
     fs.writeFileSync('README.md', '---start---' + newStr + '\n---end---');
 }
