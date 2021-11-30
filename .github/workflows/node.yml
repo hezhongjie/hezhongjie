@@ -28,9 +28,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm install  
 
-      - name: ls
-        run: ls
-
       - name: node run file
         run: node schedule-readme.js
 
