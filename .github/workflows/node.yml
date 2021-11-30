@@ -38,8 +38,6 @@ jobs:
       - name: check result
         run: |
         echo ${{steps.diff.outputs.value}}
-        echo ${{steps.diff.outputs.toString}}
-        echo ${{steps.diff.outputs.toString()}}
         echo ${{steps.diff.outputs}}
       
       # - name: commit and push
