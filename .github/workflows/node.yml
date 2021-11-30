@@ -36,7 +36,11 @@ jobs:
         run: git diff
       
       - name: check result
-        run: echo ${{steps.diff.outputs}}
+        run: |
+        echo ${{steps.diff.outputs.value}}
+        echo ${{steps.diff.outputs.toString}}
+        echo ${{steps.diff.outputs.toString()}}
+        echo ${{steps.diff.outputs}}
       
       # - name: commit and push
       #   if: (git diff) != null
