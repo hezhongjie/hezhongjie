@@ -10,26 +10,26 @@ async function getData(url, num = 3) {
     };
 
     let data = await axios({ url, headers, });
-    // console.log(data.data);
-    data = data.data;
+    data = data.data; // 返回值是对象，数据在data中
 
-    let newStr = formatData(data).join('\n\n\n');
+    let newStr = formatData(data).join('\n\n');
+    
     let oldStr = fs.readFileSync('README.md').toString();
-    // console.log(newStr); 
-
     // 替换 ---start--- 到 ---end--- 之间的内容
-    let oldData = oldStr.split('---start---')[1].split('---end---')[0].split(/\n|\r/).filter(i => {
-        return i && (i != '\r' || i != '\n');
+    const reg = /---start---(.+)---end---/s;
+    let oldData = reg.exec(oldStr)[1].split('\n').filter(i => {
+        return !!i;
     });
-
-    // console.log(oldData);
     oldData.shift();
 
     if (oldData.join('\n\n') === newStr) return;
 
-    newStr = '\n\n(更新时间:' + new Date().toString() + ' | 本部分通过Github Actions抓取RSS自动更新, 无意中实现了自动刷绿墙...)\n\n' + newStr;
+    newStr = '---start---\n\n(更新时间:' + new Date().toString() 
+            + ' | 本部分通过Github Actions抓取RSS自动更新（学习自：https://github.com/zhaoolee）)\n\n' 
+            + newStr + '\n\n---end---';
+    newStr = oldStr.replace(reg, newStr);
 
-    fs.writeFileSync('README.md', '---start---' + newStr + '\n\n---end---');
+    fs.writeFileSync('README.md', newStr);
 }
 function formatData(str) {
     const root = parser.parse(str);
