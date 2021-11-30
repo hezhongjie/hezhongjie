@@ -14,28 +14,35 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.4.1
 
-      # - name: cache node dependencies
-      #   id: cache
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: node_modules  # 需要缓存的文件的路径
-      #     key: ${{runner.os}}-npm-caches-${{ hashFiles('package-lock.json') }}
-      #     # key: 缓存文件的标识
+      - name: cache node dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules  # 需要缓存的文件的路径
+          key: ${{runner.os}}-npm-caches-${{ hashFiles('package-lock.json') }}
+          # key: 缓存文件的标识
 
 
-      # - name: install dependecies
-      #   # 判断是否 命中缓存 
-      #   if: steps.cache.outputs.cache-hit != 'true'
-      #   run: npm install  
+      - name: install dependecies
+        # 判断是否 命中缓存 
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install  
 
-      # - name: node run file
-      #   run: node schedule-readme.js
+      - name: node run file
+        run: node schedule-readme.js
 
-      - name: commit and push
-        if: (git diff) != null
-        run: 
-          git config user.name 'hezhongjie'
-          git config user.password 'hezhongjie1993'
-          git config user.email 'hezhongjie132@163.com'
-          git add README.md
-          git push
+      - name: git diff
+        id: diff
+        run: git diff
+      
+      - name: check result
+        run: echo ${{steps.diff.outputs}}
+      
+      # - name: commit and push
+      #   if: (git diff) != null
+      #   run: 
+      #     git config user.name 'hezhongjie'
+      #     git config user.password 'hezhongjie1993'
+      #     git config user.email 'hezhongjie132@163.com'
+      #     git add README.md
+      #     git push
