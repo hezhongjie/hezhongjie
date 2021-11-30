@@ -32,11 +32,10 @@ jobs:
         run: node schedule-readme.js
 
       - name: commit and push
-        run: |
-          git diff
+        if: git diff != null
+        run: 
           git config user.name 'hezhongjie'
           git config user.password 'hezhongjie1993'
           git config user.email 'hezhongjie132@163.com'
           git add README.md
-          git commit -m "Github Action Auto Updated"
           git push
