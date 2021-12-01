@@ -1,8 +1,8 @@
 on:
-  # push:
-  #   branches: [ main ]
-  schedule:
-    - cron: '0/2 * * * *'     # https://crontab.guru/
+  push:
+    branches: [ main ]
+  # schedule:
+    # - cron: '0/2 * * * *'     # https://crontab.guru/
 
 jobs:
   update:
@@ -38,12 +38,3 @@ jobs:
       - name: check result
         run: |
         echo ${{steps.diff.outputs.value}}
-      
-      # - name: commit and push
-      #   if: (git diff) != null
-      #   run: 
-      #     git config user.name 'hezhongjie'
-      #     git config user.password 'hezhongjie1993'
-      #     git config user.email 'hezhongjie132@163.com'
-      #     git add README.md
-      #     git push
