@@ -1,8 +1,8 @@
 on:
-  push:
-    branches: [ main ]
-  # schedule:
-    # - cron: '0/2 * * * *'     # https://crontab.guru/
+  # push:
+  #   branches: [ main ]
+  schedule:
+    - cron: '1 5 * * *'     # https://crontab.guru/
 
 jobs:
   update:
@@ -28,16 +28,18 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm install  
 
+      - name: ls
+        run: ls
+
       - name: node run file
-        id: file
         run: node schedule-readme.js
 
-      - name: git diff
-        id: diff
-        run: git diff
-      
-      - name: check result
+      - name: commit and push
         run: |
-          echo ${{steps.diff.file.value}}
-          echo ${{steps.diff.outputs.value}}
-          echo ${{git diff}}
+          git diff
+          git config user.name 'hezhongjie'
+          git config user.password 'hezhongjie1993'
+          git config user.email 'hezhongjie132@163.com'
+          git add README.md
+          git commit -m "Github Action Auto Updated"
+          git push
