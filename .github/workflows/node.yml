@@ -40,3 +40,4 @@ jobs:
         run: |
           echo ${{steps.diff.file.value}}
           echo ${{steps.diff.outputs.value}}
+          echo ${{git diff}}
