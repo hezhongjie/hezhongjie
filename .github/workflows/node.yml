@@ -29,6 +29,7 @@ jobs:
         run: npm install  
 
       - name: node run file
+        id: file
         run: node schedule-readme.js
 
       - name: git diff
@@ -36,4 +37,6 @@ jobs:
         run: git diff
       
       - name: check result
-        run: echo ${{steps.diff.outputs.value}}
+        run: |
+          echo ${{steps.diff.file.value}}
+          echo ${{steps.diff.outputs.value}}
