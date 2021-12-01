@@ -36,5 +36,4 @@ jobs:
         run: git diff
       
       - name: check result
-        run: |
-        echo ${{steps.diff.outputs.value}}
+        run: echo ${{steps.diff.outputs.value}}
