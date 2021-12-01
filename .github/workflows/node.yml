@@ -43,3 +43,5 @@ jobs:
           git add README.md
           git commit -m "Github Action Auto Updated"
           git push
+
+      # 如何  判断 git diff的返回值 ？
