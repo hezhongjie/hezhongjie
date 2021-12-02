@@ -41,7 +41,7 @@ jobs:
             return res
 
       - name: test2
-        run: echo ${{ steps.script.outputs.resuilt }}
+        run: echo result is ':' ${{ steps.script.outputs.result }}
 
       # - name: git-change
       #   id: git_change
