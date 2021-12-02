@@ -1,8 +1,8 @@
 on:
-  # push:
-  #   branches: [ main ]
-  schedule:
-    - cron: '1 5 * * *'     # https://crontab.guru/
+  push:
+    branches: [ main ]
+  # schedule:
+    # - cron: '1 5 * * *'     # https://crontab.guru/
 
 jobs:
   update:
@@ -34,9 +34,22 @@ jobs:
       - name: node run file
         run: node schedule-readme.js
 
-      - name: commit and push
+      - name: git-change
+        id: git_change
+        uses: collin-miller/git-changesets@0.0.2
+
+
+      - name: test
         run: |
-          git diff
+          echo ${{steps.git_change.outputs.all}}
+          echo ${{steps.git_change.outputs.added}}
+          echo ${{steps.git_change.outputs.modified }}
+          echo ${{steps.git_change.outputs.added_modified  }}
+
+
+      - name: commit and push
+        if: ${{steps.git_change.outputs.added}} == 'true'
+        run: |
           git config user.name 'hezhongjie'
           git config user.password 'hezhongjie1993'
           git config user.email 'hezhongjie132@163.com'
