@@ -24,10 +24,7 @@ module.exports = async ({github,context,core})=> {
         });
         oldData.shift();
         
-        if (oldData.join('\n\n') === newStr) {
-            context._test = false;
-            return false;
-        };
+        if (oldData.join('\n\n') === newStr) return false;
         
         newStr = '---start---\n\n(更新时间:' + new Date().toString() 
         + ' | 本部分通过Github Actions抓取RSS自动更新（学习自：https://github.com/zhaoolee）)\n\n' 
@@ -35,7 +32,6 @@ module.exports = async ({github,context,core})=> {
         newStr = oldStr.replace(reg, newStr);
         
         fs.writeFileSync('README.md', newStr);
-        context._test = true;
         return true;
     }
     function formatData(str) {

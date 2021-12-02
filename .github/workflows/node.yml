@@ -37,13 +37,12 @@ jobs:
           result-encoding: string
           script: |
             const script = require('./schedule-readme.js')
-            const res = await script({github,context,core})
-            return res
+            const changed = await script({github,context,core})
+            return changed
 
       - name: check script result
         run: |
-          echo result is ':' ${{ steps.script.outputs.result }}
-          echo context._test is ':' ${{ context._test }}
+          echo The file changed ':' ${{ steps.script.outputs.result }}
 
       - name: commit and push
         if: ${{steps.script.outputs.result}} == 'true'
