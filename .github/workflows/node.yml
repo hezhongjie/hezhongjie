@@ -30,7 +30,7 @@ jobs:
 
       # - name: node run file
       #   run: node schedule-readme.js
-      - name: script
+      - name: run script file
         id: script
         uses: actions/github-script@v5
         with: 
@@ -40,12 +40,25 @@ jobs:
             const res = await script({github,context,core})
             return res
 
-      - name: test2
-        run: echo result is ':' ${{ steps.script.outputs.result }}
+      - name: check script result
+        run: |
+          echo result is ':' ${{ steps.script.outputs.result }}
+          echo context._test is ':' ${{ context._test }}
+
+      - name: commit and push
+        if: ${{steps.script.outputs.result}} == 'true'
+        run: |
+          git config user.name 'hezhongjie'
+          git config user.password 'hezhongjie1993'
+          git config user.email 'hezhongjie132@163.com'
+          git add README.md
+          git commit -m "Github Action Auto Updated"
+          git push
+
 
       # - name: git-change
       #   id: git_change
-      #   uses: collin-miller/git-changesets
+        # uses: collin-miller/git-changesets
 
       # - name: test
       #   run: |
@@ -55,14 +68,6 @@ jobs:
       #     echo ${{steps.git_change.outputs.added_modified  }}
 
 
-      # - name: commit and push
-      #   if: ${{steps.git_change.outputs.added}} == 'true'
-      #   run: |
-      #     git config user.name 'hezhongjie'
-      #     git config user.password 'hezhongjie1993'
-      #     git config user.email 'hezhongjie132@163.com'
-      #     git add README.md
-      #     git commit -m "Github Action Auto Updated"
-      #     git push
+      
 
       # 如何  判断 git diff的返回值 ？
