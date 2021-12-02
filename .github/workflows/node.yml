@@ -36,7 +36,7 @@ jobs:
 
       - name: git-change
         id: git_change
-        uses: actions/git-changesets
+        uses: collin-miller/git-changesets
 
 
       - name: test
