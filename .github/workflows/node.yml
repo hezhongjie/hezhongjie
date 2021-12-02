@@ -45,7 +45,7 @@ jobs:
           echo The file changed ':' ${{ steps.script.outputs.result }}
 
       - name: commit and push
-        if: ${{steps.script.outputs.result}} == 'true'
+        if: steps.script.outputs.result == 'true'  # 变量不需要{{}}
         run: |
           git config user.name 'hezhongjie'
           git config user.password 'hezhongjie1993'
